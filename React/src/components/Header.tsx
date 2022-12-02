@@ -1,7 +1,7 @@
 import React from "react"
-import {AppBar, Box,Toolbar,Typography, Button,IconButton} from '@mui/material';
+import {AppBar, Box,Toolbar,Typography} from '@mui/material';
 
-export function HNHeader() {
+export function Header() {
   return (
      <Box sx={{ flexGrow: 1 }}>
      <AppBar position="static">

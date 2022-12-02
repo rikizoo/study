@@ -1,11 +1,7 @@
-export interface Story  {
+export interface PostType  {
     id: number
     by: string
     title: string
     url: string
-}
-
-export interface TabTypes{
-    value:string
-    setValue:React.Dispatch<React.SetStateAction<string>>
+    time:number
 }

@@ -1,10 +1,10 @@
 import React from "react"
-import {HNHomePage} from "./HNHomePage"
+import {HomePage} from "./HomePage"
 
 function App() {
   return (
     <div className="App">
-        <HNHomePage></HNHomePage>
+        <HomePage></HomePage>
     </div>
   )
 }

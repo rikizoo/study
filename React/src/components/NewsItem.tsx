@@ -1,5 +1,5 @@
 import React from "react";
-import { Button,Card,CardActions ,CardContent,Typography,Box,Grid} from '@mui/material';
+import { Button,Card,CardActions ,CardContent,Typography,Grid} from '@mui/material';
 
 
 type NewsItemProps = {
@@ -7,28 +7,19 @@ type NewsItemProps = {
     title: string
     url: string
     index: number
+    time:number
 }
 
 
-const bull = (
-    <Box
-      component="span"
-      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-    >
-      •
-    </Box>
-);
-
-
-export function NewsItem({id,title,url,index}:NewsItemProps){
+export function NewsItem({id,title,url,time,index}:NewsItemProps){
+  const date = new Date(time*1000)
     return(
         <Grid container spacing={2} alignItems='center' justifyContent='center' paddingBottom={3}>
         <Grid item xs={8}> 
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
-        <div>
-            <a >{title}</a>
-        </div>
+            <Typography >{title}</Typography>
+            <Typography sx={{mb:1.5}} color="text.secondary" >{date.getMonth()+1}/{date.getDate()} {date.getHours()}:{date.getMinutes()}</Typography>
         </CardContent>
         <CardActions >
         <Button size="small" href={url}>Learn More</Button>
