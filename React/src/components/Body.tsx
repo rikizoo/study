@@ -2,25 +2,35 @@ import React, { useEffect, useState } from "react"
 import { PostType } from "../interface"
 import { fetchApi, PostIds} from "../api/api"
 import { NewsItem } from "./NewsItem"
-import {Box,Tab,CircularProgress,Grid} from '@mui/material';
+//import {BasicPagination} from "./BasicPagination"
+import {Box,Tab,CircularProgress,Grid,Pagination,Typography,Stack} from '@mui/material';
 import {TabContext,TabList,TabPanel} from '@mui/lab';
 
 
 export function Body(){
-    const [articles,setArticles] = useState<PostType[]>([])
+    const [ articles,setArticles ] = useState<PostType[]>([])
     // ロード中の場合はtrue、ロードが完了した場合はfalseを返す(初期値はtrue)
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
-    const [value, setValue] = useState<string>('top');
+    const [ value, setValue ] = useState<string>('top');
+    const [ postLength, setPostLength ] = useState<number>(0)
+    const [page, setPage] = useState<number>(1)
 
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    const handlePageChange = (event: React.ChangeEvent<unknown>, newValue:number) => {
+      setPage(newValue)
+      window.scrollTo(0,0)
+    }
+
+    const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
       setValue(newValue);
+      setPage(1)
     };
 
     const loadStories = async () =>{
         setIsLoading(true)
-        const postIdsData = await PostIds(value)
-        const {posts,isLoading} = await fetchApi(postIdsData.slice(0,10))
+        const {ids,pageLength} = await PostIds(value)
+        setPostLength(pageLength/10)
+        const {posts,isLoading} = await fetchApi(ids.slice((page*10)-10,page*10))
         setIsLoading(isLoading)
         setArticles(posts)
     }
@@ -30,13 +40,13 @@ export function Body(){
     useEffect(()=>{
         loadStories()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[value])
+    },[value,page])
 
     return (
         <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <TabList onChange={handleTabChange} aria-label="lab API tabs example">
               <Tab label="トップニュース" value="top" />
               <Tab label="新着" value="new" />
               <Tab label="ベスト" value="best" />
@@ -45,7 +55,7 @@ export function Body(){
 
           {isLoading 
           ? 
-          <Grid container justifyContent='center' paddingTop={3}>
+          <Grid container justifyContent='center' paddingTop={3} paddingBottom={100}>
           <CircularProgress color="inherit" ></CircularProgress>
           </Grid>
           :
@@ -74,6 +84,9 @@ export function Body(){
           </>
           }
         </TabContext>
+        <Stack spacing={2} alignItems="center" paddingBottom={3}>
+          <Pagination count={postLength} color="primary" onChange={handlePageChange}/>
+        </Stack>
       </Box>
     )
 }

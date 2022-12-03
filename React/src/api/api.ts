@@ -1,4 +1,8 @@
 import {PostType} from "../interface"
+interface FetchIds{
+    ids:number[]
+    pageLength:number
+}
 interface FetchStory{
     posts:PostType[]
     isLoading:boolean
@@ -6,10 +10,11 @@ interface FetchStory{
 export const FETCH_API_URL = "https://hacker-news.firebaseio.com/v0"
 
 
-export const PostIds = async (currentTab:string): Promise<number[]> => {
+export const PostIds = async (currentTab:string): Promise<FetchIds> => {
     const response = await fetch(`${FETCH_API_URL}/${currentTab}stories.json`)
     const ids = await response.json()
-    return ids
+    const pageLength = Object.keys(ids).length;
+    return {ids,pageLength}
 }
 
 export const PostData = async (id:number): Promise<PostType> => {
