@@ -19,7 +19,7 @@ export function NewsItem({id,title,url,time,index}:NewsItemProps){
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
             <Typography >{title}</Typography>
-            <Typography sx={{mb:1.5}} color="text.secondary" >{date.getMonth()+1}/{date.getDate()} {date.getHours()}:{date.getMinutes()}</Typography>
+            <Typography sx={{mb:1.5}} color="text.secondary" >{date.toLocaleDateString('ja-JP')} {date.toLocaleTimeString('ja-JP')}</Typography>
         </CardContent>
         <CardActions >
         <Button size="small" href={url}>Learn More</Button>
