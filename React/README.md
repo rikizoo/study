@@ -1,5 +1,5 @@
 ## React + TypeScript で Hacker News Api を使用したニュースサイトの作成
-### 動作確認
+## 動作確認
 * node version 16.15.1
 * npm version 8.11.0
 ```
@@ -8,3 +8,5 @@ cd study/React
 npm install
 npm start
 ```
+## Api
+* [Hacker News API](https://github.com/HackerNews/API)

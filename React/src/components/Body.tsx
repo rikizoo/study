@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react"
 import { PostType } from "../interface"
 import { fetchApi, PostIds} from "../api/api"
 import { NewsItem } from "./NewsItem"
-//import {BasicPagination} from "./BasicPagination"
-import {Box,Tab,CircularProgress,Grid,Pagination,Typography,Stack} from '@mui/material';
+import {BasicPagination} from "./BasicPagination"
+import {Box,Tab,CircularProgress,Grid} from '@mui/material';
 import {TabContext,TabList,TabPanel} from '@mui/lab';
 
 
 export function Body(){
-    const [ articles,setArticles ] = useState<PostType[]>([])
+    const [ articles, setArticles ] = useState<PostType[]>([])
     // ロード中の場合はtrue、ロードが完了した場合はfalseを返す(初期値はtrue)
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ value, setValue ] = useState<string>('top');
     const [ postLength, setPostLength ] = useState<number>(0)
-    const [page, setPage] = useState<number>(1)
+    const [ page, setPage ] = useState<number>(1)
 
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, newValue:number) => {
@@ -84,9 +84,7 @@ export function Body(){
           </>
           }
         </TabContext>
-        <Stack spacing={2} alignItems="center" paddingBottom={3}>
-          <Pagination count={postLength} color="primary" onChange={handlePageChange}/>
-        </Stack>
+        <BasicPagination postLength={postLength} onChange={handlePageChange}></BasicPagination>
       </Box>
     )
 }

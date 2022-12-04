@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
-import {Pagination,Typography,Stack} from '@mui/material';
+import {Pagination,Stack} from '@mui/material';
 
 type PaginationProps = {
-  totalPage:number
+  postLength:number
+  onChange:(event: React.ChangeEvent<unknown>, page: number) => void
 }
 
-export function BasicPagination({totalPage}:PaginationProps) {
-  const [page, setPage] = useState<number>(1)
-  const handleChange = (event: React.ChangeEvent<unknown>, newvalue:number) => {
-    setPage(newvalue)
-  }
+export function BasicPagination({postLength,onChange}:PaginationProps) {
   return (
-    <Stack spacing={2} alignItems="center">
-      <Typography>Page:{page}</Typography>
-      <Pagination count={totalPage} color="primary" onChange={handleChange}/>
-    </Stack>
+    <Stack spacing={2} alignItems="center" paddingBottom={3}>
+    <Pagination count={postLength} color="primary" onChange={onChange}/>
+   </Stack>
   );
 }

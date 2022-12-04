@@ -16,13 +16,13 @@ export function NewsItem({id,title,url,time,index}:NewsItemProps){
     return(
         <Grid container spacing={2} alignItems='center' justifyContent='center' paddingBottom={3}>
         <Grid item xs={8}> 
-        <Card sx={{ minWidth: 275 }}>
+        <Card >
             <CardContent>
             <Typography >{title}</Typography>
-            <Typography sx={{mb:1.5}} color="text.secondary" >{date.toLocaleDateString('ja-JP')} {date.toLocaleTimeString('ja-JP')}</Typography>
+            <Typography color="text.secondary" >{date.toLocaleDateString('ja-JP')} {date.toLocaleTimeString('ja-JP')}</Typography>
         </CardContent>
-        <CardActions >
-        <Button size="small" href={url}>Learn More</Button>
+        <CardActions sx={{justifyContent:'right',pr:1.5}}>
+        <Button variant="outlined" size="small" href={url}>Learn More</Button>
         </CardActions>
       </Card>
       </Grid>
