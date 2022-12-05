@@ -1,10 +1,10 @@
-import React from "react"
-import {HomePage} from "./HomePage"
+import React from 'react'
+import { HomePage } from './HomePage'
 
-const App : React.FC = () => {
+const App: React.FC = () => {
   return (
     <div>
-        <HomePage></HomePage>
+      <HomePage></HomePage>
     </div>
   )
 }
