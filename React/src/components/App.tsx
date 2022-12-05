@@ -1,9 +1,9 @@
 import React from "react"
 import {HomePage} from "./HomePage"
 
-function App() {
+const App : React.FC = () => {
   return (
-    <div className="App">
+    <div>
         <HomePage></HomePage>
     </div>
   )

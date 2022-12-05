@@ -1,8 +1,4 @@
-import {PostType} from "../interface"
-interface FetchIds{
-    ids:number[]
-    pageLength:number
-}
+import {PostType, FetchIds} from "../interface"
 interface FetchStory{
     posts:PostType[]
     isLoading:boolean

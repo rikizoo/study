@@ -1,7 +1,7 @@
 import React from "react"
 import {AppBar, Box,Toolbar,Typography} from '@mui/material';
 
-export function Header() {
+export const Header:React.FC = () => {
   return (
      <Box sx={{ flexGrow: 1 }}>
      <AppBar position="static">

@@ -5,7 +5,7 @@ type PaginationProps = {
   onChange:(event: React.ChangeEvent<unknown>, page: number) => void
 }
 
-export function BasicPagination({postLength,onChange}:PaginationProps) {
+export const BasicPagination : React.FC<PaginationProps> = ({postLength,onChange}) => {
   return (
     <Stack spacing={2} alignItems="center" paddingBottom={3}>
     <Pagination count={postLength} color="primary" onChange={onChange}/>

@@ -7,7 +7,7 @@ import {Box,Tab,CircularProgress,Grid} from '@mui/material';
 import {TabContext,TabList,TabPanel} from '@mui/lab';
 
 
-export function Body(){
+export const Body : React.FC = () =>{
     const [ articles, setArticles ] = useState<PostType[]>([])
     // ロード中の場合はtrue、ロードが完了した場合はfalseを返す(初期値はtrue)
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
@@ -16,12 +16,12 @@ export function Body(){
     const [ page, setPage ] = useState<number>(1)
 
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, newValue:number) => {
+    const handlePageChange = (event: React.ChangeEvent<unknown>, newValue:number):void => {
       setPage(newValue)
       window.scrollTo(0,0)
     }
 
-    const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    const handleTabChange = (event: React.SyntheticEvent, newValue: string):void => {
       setValue(newValue);
       setPage(1)
     };
