@@ -14,11 +14,6 @@ export const Body: React.FC = () => {
   const [postLength, setPostLength] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, newValue: number): void => {
-    setPage(newValue)
-    window.scrollTo(0, 0)
-  }
-
   const handleTabChange = (event: React.SyntheticEvent, newValue: string): void => {
     setValue(newValue)
     setPage(1)
@@ -51,7 +46,7 @@ export const Body: React.FC = () => {
         </Box>
 
         {isLoading ? (
-          <Grid container justifyContent="center" paddingTop={3} paddingBottom={100}>
+          <Grid container justifyContent="center" paddingTop={3} paddingBottom={200}>
             <CircularProgress color="inherit"></CircularProgress>
           </Grid>
         ) : (
@@ -80,7 +75,7 @@ export const Body: React.FC = () => {
           </>
         )}
       </TabContext>
-      <BasicPagination postLength={postLength} onChange={handlePageChange}></BasicPagination>
+      <BasicPagination postLength={postLength} page={page} setPage={setPage}></BasicPagination>
     </Box>
   )
 }
