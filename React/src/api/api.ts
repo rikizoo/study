@@ -1,34 +1,33 @@
-import React from "react"
-import {Story} from "../interface"
-interface FetchStory{
-    stories:Story[]
-    isLoading:boolean
+import { PostType, FetchIds } from '../interface'
+interface FetchStory {
+  posts: PostType[]
+  isLoading: boolean
 }
-export const HN_HOST = "https://hacker-news.firebaseio.com/v0"
+export const FETCH_API_URL = 'https://hacker-news.firebaseio.com/v0'
 
-
-export const fetchTopStoriesIds = async (currentTab:string): Promise<number[]> => {
-    const response = await fetch(`${HN_HOST}/${currentTab}stories.json`)
-    const topStoriesIds = await response.json()
-    return topStoriesIds
-}
-
-export const fetchStory = async (id:number): Promise<Story> => {
-    const response = await fetch(`${HN_HOST}/item/${id}.json`)
-    const storyData = await response.json()
-
-    const story:Story = {
-        id: storyData.id,
-        by: storyData.by,
-        title: storyData.title,
-        url: storyData.url,
-      }
-      return story
-
+export const PostIds = async (currentTab: string): Promise<FetchIds> => {
+  const response = await fetch(`${FETCH_API_URL}/${currentTab}stories.json`)
+  const ids = await response.json()
+  const pageLength = Object.keys(ids).length
+  return { ids, pageLength }
 }
 
-export const fetchStories = async (ids: number[]): Promise<FetchStory> => {
-    const stories = await Promise.all(ids.map(fetchStory))
-    const isLoading = false
-    return {stories,isLoading}
+export const PostData = async (id: number): Promise<PostType> => {
+  const response = await fetch(`${FETCH_API_URL}/item/${id}.json`)
+  const postData = await response.json()
+
+  const post: PostType = {
+    id: postData.id,
+    by: postData.by,
+    title: postData.title,
+    url: postData.url,
+    time: postData.time
+  }
+  return post
+}
+
+export const fetchApi = async (ids: number[]): Promise<FetchStory> => {
+  const posts = await Promise.all(ids.map(PostData))
+  const isLoading = false
+  return { posts, isLoading }
 }

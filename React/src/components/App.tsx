@@ -1,10 +1,10 @@
-import React from "react"
-import {HNHomePage} from "./HNHomePage"
+import React from 'react'
+import { HomePage } from './HomePage'
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-        <HNHomePage></HNHomePage>
+    <div>
+      <HomePage></HomePage>
     </div>
   )
 }
