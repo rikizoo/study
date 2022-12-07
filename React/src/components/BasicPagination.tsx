@@ -1,5 +1,5 @@
-import { Pagination, Stack } from '@mui/material'
 import React from 'react'
+import { Pagination, Stack } from '@mui/material'
 
 type PaginationProps = {
   postLength: number

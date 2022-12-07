@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { PostType } from '../interface'
 import { fetchApi, PostIds } from '../api/api'
-import { NewsItem } from './NewsItem'
+import { TabPanels } from './TabPanels'
 import { BasicPagination } from './BasicPagination'
-import { Box, Tab, CircularProgress, Grid } from '@mui/material'
-import { TabContext, TabList, TabPanel } from '@mui/lab'
+import { Box } from '@mui/material'
 
 export const Body: React.FC = () => {
   const [articles, setArticles] = useState<PostType[]>([])
@@ -13,11 +12,6 @@ export const Body: React.FC = () => {
   const [value, setValue] = useState<string>('top')
   const [postLength, setPostLength] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
-
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string): void => {
-    setValue(newValue)
-    setPage(1)
-  }
 
   const loadStories = async () => {
     setIsLoading(true)
@@ -36,45 +30,13 @@ export const Body: React.FC = () => {
 
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleTabChange} aria-label="lab API tabs example">
-            <Tab label="トップニュース" value="top" />
-            <Tab label="新着" value="new" />
-            <Tab label="ベスト" value="best" />
-          </TabList>
-        </Box>
-
-        {isLoading ? (
-          <Grid container justifyContent="center" paddingTop={3} paddingBottom={200}>
-            <CircularProgress color="inherit"></CircularProgress>
-          </Grid>
-        ) : (
-          <>
-            <TabPanel value="top">
-              <div className="pl-48 pt-24 bg-white border-b-8 border-gray-50">
-                {articles.map((it, index) => (
-                  <NewsItem key={it.id} id={it.id} title={it.title} url={it.url} time={it.time} index={index} />
-                ))}
-              </div>
-            </TabPanel>
-            <TabPanel value="new">
-              <div className="pl-48 pt-24 bg-white border-b-8 border-gray-50">
-                {articles.map((it, index) => (
-                  <NewsItem key={it.id} id={it.id} title={it.title} url={it.url} time={it.time} index={index} />
-                ))}
-              </div>
-            </TabPanel>
-            <TabPanel value="best">
-              <div className="pl-48 pt-24 bg-white border-b-8 border-gray-50">
-                {articles.map((it, index) => (
-                  <NewsItem key={it.id} id={it.id} title={it.title} url={it.url} time={it.time} index={index} />
-                ))}
-              </div>
-            </TabPanel>
-          </>
-        )}
-      </TabContext>
+      <TabPanels
+        articles={articles}
+        isLoading={isLoading}
+        value={value}
+        setValue={setValue}
+        setPage={setPage}
+      ></TabPanels>
       <BasicPagination postLength={postLength} page={page} setPage={setPage}></BasicPagination>
     </Box>
   )
