@@ -75,3 +75,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 起動させておく　./vendor/bin/sail up
 裏で動かしておく　./vendor/bin/sail up -d
 接続先　 http://localhost/translation
+
+## 環境
+
+ubuntu
+Docker Desktop
+Laravel Sail
